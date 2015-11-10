@@ -10,17 +10,17 @@
   <style>
     html, body {width:100%; height:100%; padding: 0; margin: 0;}
     #map { width: 100%; height:610; background: black;}
-    #menu { position: absolute; top: 50; left: 10; width: 130px; height:460px; z-index:10;border: 0px solid #777777;}
+    #menu { position: absolute; top: 70; left: 10; width: 130px; height:460px; z-index:10;border: 0px solid #777777;}
     #menu a { 
 	box-shadow: 2px 2px 2px #888888;
 	  opacity: 0.7;
       margin: 8px 0px 0 0;
       float: left;
       vertical-align: baseline;
-      width: 130px;
+      width: 115px;
       padding: 4px;
       text-align: center;
-      font: bold 13px "Open Sans",sans-serif;
+      font: bold 12px "Open Sans",sans-serif;
       line-height: normal;
       color: white;
       border-radius: 4px;
@@ -35,19 +35,19 @@
     }
 	
 	#dashboard {
-	      box-shadow: 3px 3px 3px #888888;
+	      /box-shadow: 2px 2px 2px #888888;
 	      border: 1px solid #777777;	 
 	      border-radius: 4px;
           background: white;
           //border-left: 0px solid #000;    
-          height: 290;
+          height: 400;
           font-family: 'Open Sans', sans-serif;
 		  color: white;          
           padding-top: 3px;
           position: absolute;
-          left: 180;
+          left: 145;
           text-align: left;
-          top: 170;
+          top: 135;
           z-index: 2001;
           opacity: 1;
           width: 210px;
@@ -55,32 +55,27 @@
 	  #dashboard3 {
 	       
 	      border-radius: 4px;
-          background: white;
+          background: #F5F5F5;
           //border-left: 0px solid #000;    
-          height: 100;
+          height: 30;
           font-family: 'Open Sans', sans-serif;
 		  color: white;          
           padding: 0px;
           position: absolute;
-          left: 180;
+          left: 145;
           text-align: left;
-          bottom: 0;
+          bottom: 20;
           z-index: 2001;
           opacity: 1;
-          width: 210px;
+          width: 225px;
       }
-	  #chart_div {
-          height: 250px;
-          width: 250px;
-		  padding: 0px;
-      }
-		
+
 	  #dashboard2 {
 	      border: 1px solid #777777;
 		  box-shadow: 5px 5px 5px #888888;
 	      border-radius: 4px;
-          background: white;
-          height: 580;
+          background: #F5F5F5;
+          height: 590;
           color: white;
           padding: 0px;
           position: absolute;
@@ -89,64 +84,16 @@
           top: 10;
           z-index: 2001;
           opacity: 1;
-          width: 420px;
+          width: 370px;
   </style>
   
   <script>
-  //load visualization library from google
-      google.load('visualization', '1', {'packages':['corechart','bar']});
-	
-      function draw_chart(data) {
-         var data = google.visualization.arrayToDataTable([
-            ['Origins', 'value'],
-			['Somalia',  data[0]],
-			['Ethiopia',  data[1]],
-            ['Djibouti',  data[2]],
-            ['Eritrea', data[3]],
-			['Others',  data[4]]
-			
-					
-         ]);
-		
-
-            var options = {
-            //title: data.villages + ' : Cases',
-            legend: {position: 'top', maxLines: 1},
-			chartArea:{left:40,top:10,width:'60%',height:'60%'},
-            width:210,
-			height: 150,
-			backgroundColor:'white',
-			colors:['#850200'],
-			animation:{	duration: 1000,	easing: 'out',},
-			
-			hAxis: {
-			//title: 'Months',
-			textStyle:{fontSize: '10', paddingRight: '0',marginRight: '0'},
-            direction:1,
-            slantedText:true,
-            slantedTextAngle:90,
-			animation: {
-            duration: 1000},
-            },
-           
-            vAxis: { 
-			minValue:0,
-			maxValue:600,
-			title: 'No. of Incidents',
-			viewWindowMode: 'explicit',
-            viewWindow:{
-            max:4,
-            min:0,
-			textStyle:{fontSize: '10', paddingRight: '100',marginRight: '100'}
-          }
-        }
-		};	
-			
-          
-          var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
-          chart.draw(data, options);
-      }
-
+  
+	 
+	  
+	  
+	  
+	  
   var map;
   function init(){
     // initiate leaflet map
@@ -158,23 +105,20 @@
 	  zoom: 4
     });
 	
-	L.control.scale({
-    imperial: false, 
-    position: 'topright',
-    }).addTo(map);
+	
 	
 	L.control.zoom({
      position:'topright'
 	}).addTo(map);
 	
-	 L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
+	 L.tileLayer('http://a{s}.acetate.geoiq.com/tiles/acetate-hillshading/{z}/{x}/{y}.png', {
       attribution: '<a href="http://migrantreport.org/">Map created by Migrant Report.'
     }).addTo(map);
 	
 	//http://a{s}.acetate.geoiq.com/tiles/acetate-hillshading/{z}/{x}/{y}.png
 	
 	
-  	//*adding first layer (removing interactivity)*
+  	//*adding first layer (removing interactivity)
 	
 	var layerUrl1 = 'https://migrantreport.cartodb.com/api/v2/viz/e6ff9b24-473f-11e5-b696-0e9d821ea90d/viz.json';
 	cartodb.createLayer(map, layerUrl1, {
@@ -192,7 +136,7 @@
 	//*adding second layer**
   
 	
-    var layerUrl2 =	'https://migrantreport.cartodb.com/api/v2/viz/3ace3b2e-83aa-11e5-883b-0ecd1babdde5/viz.json';
+    var layerUrl2 =	'https://migrantreport.cartodb.com/api/v2/viz/f6e309a8-8700-11e5-bf5b-0e5db1731f59/viz.json';
 	var sublayers = [];
 	cartodb.createLayer(map, layerUrl2, {
 	cartodb_logo: false,
@@ -206,7 +150,7 @@
 	
 	
 	var subLayerOptions = {
-      sql: "SELECT * FROM table_4mi_1",
+     sql: "SELECT * FROM table_4mi_1",
      }
 	  
   
@@ -215,19 +159,34 @@
     sublayer.set(subLayerOptions);
     sublayers.push(sublayer);
 	sublayer.setInteraction(true);
-    sublayer.setInteractivity("cartodb_id,a_location,a_no_incidents,a_no_people,b_death,b_extortion,b_food_and_water_problems,b_kidnapping,b_missing,b_physical,b_sexual,d_djibouti1,d_eritrea1,d_ethiopia1,d_somalia1,c_female,c_male");
+    sublayer.setInteractivity("cartodb_id,a_incident,a_location,a_no_incidents,a_no_people,b_death,b_extortion,b_food_and_water_problems,b_kidnapping,b_missing,b_physical,b_sexual,d_djibouti1,d_eritrea1,d_ethiopia1,d_somalia1,c_female,c_male");
 			
 	sublayer.on('featureClick',function(e, latlng, pos, data, subLayerIndex) {
 		
 		$("#header").html("<p>" + data.a_location +  "</p>   ");
-		$("#event1").html("<p>"+"No. of Incidents: " + data.a_no_incidents +  "</p>   ");
-		$("#event2").html("<p>"+"No. of Victims: " + data.a_no_people +  "</p>   ");
-		
-		//$("#event").html("<p>" +'Incident type : '+ data.b_incident +  "</p>   ");
-		
-		//draw_chart([data.D_Somalia1,data.D_Eritrea1,data.D_Ethiopia1,data.D_Djibouti1,data.D_Unknown1]);
-        
+		$("#event3").html("<p>"+"Incident: " + data.a_incident+  "</p>");
+		//$("#event1").html("<p>"+ data.b_physical +" Physical Abuse" +"</p>");
+		//$("#event2").html("<p>"+ data.b_sexual +" Sexual Abuse" +"</p>");
+		//$("#event4").html("<p>"+ data.b_kidnapping +" Incidents of Kisnapping" + "</p>");
+		//$("#event5").html("<p>"+ data.b_extortion +" Extortion" +"</p>");
+		//$("#event6").html("<p>"+ data.b_missing +" Missing People" + "</p>");
+		//$("#event7").html("<p>"+ data.b_death +" Deaths" +"</p>");
+		//$("#event7").html("<p>"+ data.b_food_and_water_problems +" Lack of Food/Water" +"</p>");
+			  	
 		});
+
+
+
+
+
+		
+		
+		
+		
+		
+		
+		
+	
 	
 	
 	
@@ -255,94 +214,87 @@
   deaths: function(){
     sublayers[0].set({
 	sql: "SELECT * FROM table_4mi_1 where b_death <> 0",
-	cartocss: "#table_4mi_1{ marker-fill-opacity: 0.9;marker-line-color: #FFF; marker-line-width: 0.7; marker-line-opacity: 1; marker-placement: point; marker-multi-policy: largest;marker-type: ellipse; marker-fill: #D6301D; marker-allow-overlap: true; marker-clip: false;}#table_4mi_1 [ b_death <= 5] { marker-width: 28.0;}#table_4mi_1 [ b_death <= 4] {marker-width: 21.3;}#table_4mi_1 [ b_death <= 3] { marker-width: 19.1;}#table_4mi_1 [ b_death <= 2] {   marker-width: 16.9;}#table_4mi_1 [ b_death <= 1] { marker-width: 12.4;}"
+	cartocss: "#table_4mi_1{ marker-fill-opacity: 0.9;marker-line-color: #FFF; marker-line-width: 0.3; marker-line-opacity: 1; marker-placement: point; marker-multi-policy: largest;marker-type: ellipse; marker-fill: #B81609; marker-allow-overlap: true; marker-clip: false;}#table_4mi_1 [ b_death <= 5] { marker-width: 26;}#table_4mi_1 [ b_death <= 4] {marker-width: 20;}#table_4mi_1 [ b_death <= 3] { marker-width: 15;}#table_4mi_1 [ b_death <= 2] {   marker-width: 10;}#table_4mi_1 [ b_death <= 1] { marker-width: 8;}"
 	});
     return true;
   },
   Missing: function(){
     sublayers[0].set({
 	sql: "SELECT * FROM table_4mi_1 where b_missing <> 0",
-	cartocss: "#table_4mi_1{ marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.7; marker-line-opacity: 1; marker-placement: point;marker-multi-policy: largest; marker-type: ellipse; marker-fill: #D6301D;marker-allow-overlap: true; marker-clip: false;}#table_4mi_1 [ b_missing >= 11] { marker-width: 28.0;}#table_4mi_1 [ b_missing <= 11] { marker-width: 25.8;}#table_4mi_1 [ b_missing <= 10] {   marker-width: 23.6;}#table_4mi_1 [ b_missing <= 8] {  marker-width: 21.3;}#table_4mi_1 [ b_missing <= 6] { marker-width: 19.1;}#table_4mi_1 [ b_missing <= 5] {marker-width: 16.9;}#table_4mi_1 [ b_missing <= 4] { marker-width: 14.7;}#table_4mi_1 [ b_missing <= 3] { marker-width: 12.4;}#table_4mi_1 [ b_missing <= 2] {marker-width: 10.2;}#table_4mi_1 [ b_missing <= 1] { marker-width: 8.0;}"
+	cartocss: "#table_4mi_1{ marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.3; marker-line-opacity: 1; marker-placement: point;marker-multi-policy: largest; marker-type: ellipse; marker-fill: #B81609;marker-allow-overlap: true; marker-clip: false;}#table_4mi_1 [ b_missing >= 11] { marker-width: 26;}#table_4mi_1 [ b_missing <= 11] { marker-width: 25.8;}#table_4mi_1 [ b_missing <= 10] {   marker-width: 23.6;}#table_4mi_1 [ b_missing <= 8] {  marker-width: 21.3;}#table_4mi_1 [ b_missing <= 6] { marker-width: 19.1;}#table_4mi_1 [ b_missing <= 5] {marker-width: 16.9;}#table_4mi_1 [ b_missing <= 4] { marker-width: 14.7;}#table_4mi_1 [ b_missing <= 3] { marker-width: 12.4;}#table_4mi_1 [ b_missing <= 2] {marker-width: 10.2;}#table_4mi_1 [ b_missing <= 1] { marker-width: 7;}"
 	});
     return true;
   },
     extorsion: function(){
     sublayers[0].set({
-	sql: "SELECT * FROM table_4mi_1 where b_kidnapping <> 0 ",
-	cartocss: "#table_4mi_1{ marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.7; marker-line-opacity: 1; marker-placement: point;marker-multi-policy: largest; marker-type: ellipse; marker-fill: #D6301D;marker-allow-overlap: true; marker-clip: false;}#table_4mi_1 [ b_extortion >= 22] { marker-width: 28.0;}#table_4mi_1 [ b_extortion <= 15] { marker-width: 25.8;}#table_4mi_1 [ b_extortion <= 9] {   marker-width: 23.6;}#table_4mi_1 [ b_extortion <= 8] {  marker-width: 21.3;}#table_4mi_1 [ b_extortion <= 7] { marker-width: 19.1;}#table_4mi_1 [ b_extortion <= 6] { marker-width: 16.9;}#table_4mi_1 [ b_extortion <= 5] {  marker-width: 14.7;}#table_4mi_1 [ b_extortion <= 4] {  marker-width: 12.4;}#table_4mi_1 [ b_extortion <= 3] {  marker-width: 10.2;}#table_4mi_1 [ b_extortion <= 2] {  marker-width: 8.0;}"
-	});
+	sql: "SELECT * FROM table_4mi_1 where b_extortion <> 0 ",
+	cartocss: "#table_4mi_1{marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.3;marker-line-opacity: 1; marker-placement: point; marker-multi-policy: largest;marker-type: ellipse;marker-fill: #B81609;marker-allow-overlap: true;marker-clip: false;}#table_4mi_1 [ b_extortion <= 22] { marker-width: 26.0;}#table_4mi_1 [ b_extortion <= 15] { marker-width: 23.0;}#table_4mi_1 [ b_extortion <= 10] { marker-width: 21.0;}#table_4mi_1 [ b_extortion <= 8] { marker-width: 19.0;}#table_4mi_1 [ b_extortion <= 7] { marker-width: 17.0;}#table_4mi_1 [ b_extortion <= 6] { marker-width: 15.0;}#table_4mi_1 [ b_extortion <= 5] { marker-width: 13.0;}#table_4mi_1 [ b_extortion <= 4] { marker-width: 11.0;}#table_4mi_1 [ b_extortion <= 3] {marker-width: 9.0;}#table_4mi_1 [ b_extortion <= 2] {marker-width: 7.0;}"
+});
     return true;
   },
     kidnap: function(){
     sublayers[0].set({
-	sql: "SELECT * FROM table_4mi_1 where b_extortion <> 0",
+	sql: "SELECT * FROM table_4mi_1 where b_kidnapping <> 0",
 	
-	cartocss: "#table_4mi_1{marker-fill-opacity: 0.9;marker-line-color: #FFF;marker-line-width: 0.7;marker-line-opacity: 1; marker-placement: point;  marker-multi-policy: largest;marker-type: ellipse;marker-fill: #D6301D;marker-allow-overlap: true;marker-clip: false;}#table_4mi_1 [ b_extortion <= 22] {marker-width: 28.0;}#table_4mi_1 [ b_extortion <= 15] {marker-width: 25.8;}#table_4mi_1 [ b_extortion <= 9] {marker-width: 23.6;}#table_4mi_1 [ b_extortion <= 8] {marker-width: 21.3;}#table_4mi_1 [ b_extortion <= 7] {marker-width: 19.1;}#table_4mi_1 [ b_extortion <= 6] {marker-width: 16.9;}#table_4mi_1 [ b_extortion <= 5] {marker-width: 14.7;}#table_4mi_1 [ b_extortion <= 4] {marker-width: 12.4;}#table_4mi_1 [ b_extortion <= 3] {marker-width: 10.2;}#table_4mi_1 [ b_extortion <= 2] {marker-width: 8.0;}"
-	});
+	cartocss: "#table_4mi_1{ marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.3; marker-line-opacity: 1; marker-placement: point; marker-multi-policy: largest; marker-type: ellipse; marker-fill: #B81609; marker-allow-overlap: true; marker-clip: false;}#table_4mi_1 [ b_kidnapping <= 17] { marker-width: 26.0;}#table_4mi_1 [ b_kidnapping <= 14] { marker-width: 21.0;}#table_4mi_1 [ b_kidnapping <= 10] { marker-width: 19.0;}#table_4mi_1 [ b_kidnapping <= 8] {marker-width: 17.0;}#table_4mi_1 [ b_kidnapping <= 7] { marker-width: 15.0;}#table_4mi_1 [ b_kidnapping <= 4] { marker-width: 13.0;}#table_4mi_1 [ b_kidnapping <= 2] { marker-width: 9.0;}#table_4mi_1 [ b_kidnapping <= 1] { marker-width: 7.0;}"});
     return true;
   },
   Sexual: function(){
     sublayers[0].set({
 	sql: "SELECT * FROM table_4mi_1 where b_sexual <> 0",
-	cartocss: "#table_4mi_1{ marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.7; marker-line-opacity: 1; marker-placement: point;marker-multi-policy: largest; marker-type: ellipse; marker-fill: #D6301D;marker-allow-overlap: true; marker-clip: false;}#table_4mi_1 [ b_sexual <= 12] {  marker-width: 28.0;}#table_4mi_1 [ b_sexual <= 12] { marker-width: 25.8;}#table_4mi_1 [ b_sexual <= 9] { marker-width: 23.6;}#table_4mi_1 [ b_sexual <= 6] { marker-width: 21.3;}#table_4mi_1 [ b_sexual <= 6] { marker-width: 19.1;}#table_4mi_1 [ b_sexual <= 4] { marker-width: 16.9;}#table_4mi_1 [ b_sexual <= 3] { marker-width: 14.7;}#table_4mi_1 [ b_sexual <= 3] {marker-width: 12.4;}#table_4mi_1 [ b_sexual <= 2] { marker-width: 10.2;}#table_4mi_1 [ b_sexual <= 1] { marker-width: 8.0;}"
+	cartocss: "#table_4mi_1{ marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.3; marker-line-opacity: 1; marker-placement: point;marker-multi-policy: largest; marker-type: ellipse; marker-fill: #B81609;marker-allow-overlap: true; marker-clip: false;}#table_4mi_1 [ b_sexual <= 12] {  marker-width: 26;}#table_4mi_1 [ b_sexual <= 12] { marker-width: 25.8;}#table_4mi_1 [ b_sexual <= 9] { marker-width: 23.6;}#table_4mi_1 [ b_sexual <= 6] { marker-width: 21.3;}#table_4mi_1 [ b_sexual <= 6] { marker-width: 19.1;}#table_4mi_1 [ b_sexual <= 4] { marker-width: 16.9;}#table_4mi_1 [ b_sexual <= 3] { marker-width: 14.7;}#table_4mi_1 [ b_sexual <= 3] {marker-width: 12.4;}#table_4mi_1 [ b_sexual <= 2] { marker-width: 10.2;}#table_4mi_1 [ b_sexual <= 1] { marker-width: 7;}"
 	});
     return true;
   },
     physical: function(){
     sublayers[0].set({
 	sql: "SELECT * FROM table_4mi_1 where b_physical <> 0",
-	cartocss: "#table_4mi_1{ marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.7; marker-line-opacity: 1; marker-placement: point;marker-multi-policy: largest; marker-type: ellipse; marker-fill: #D6301D;marker-allow-overlap: true; marker-clip: false;}#table_4mi_1 [ b_physical <= 15] {marker-width: 28.0;}#table_4mi_1 [ b_physical <= 11] {marker-width: 25.8;}#table_4mi_1 [ b_physical <= 9] {marker-width: 23.6;}#table_4mi_1 [ b_physical <= 8] {marker-width: 21.3;}#table_4mi_1 [ b_physical <= 7] {marker-width: 19.1;}#table_4mi_1 [ b_physical <= 6] { marker-width: 16.9;}#table_4mi_1 [ b_physical <= 5] {marker-width: 14.7;}#table_4mi_1 [ b_physical <= 4] {marker-width: 12.4;}#table_4mi_1 [ b_physical <= 3] { marker-width: 10.2;}#table_4mi_1 [ b_physical <= 2] {marker-width: 8.0;}"
+	cartocss: "#table_4mi_1{ marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.3; marker-line-opacity: 1; marker-placement: point;marker-multi-policy: largest; marker-type: ellipse; marker-fill: #B81609;marker-allow-overlap: true; marker-clip: false;}#table_4mi_1 [ b_physical <= 15] {marker-width: 26;}#table_4mi_1 [ b_physical <= 11] {marker-width: 25.8;}#table_4mi_1 [ b_physical <= 9] {marker-width: 23.6;}#table_4mi_1 [ b_physical <= 8] {marker-width: 21.3;}#table_4mi_1 [ b_physical <= 7] {marker-width: 19.1;}#table_4mi_1 [ b_physical <= 6] { marker-width: 16.9;}#table_4mi_1 [ b_physical <= 5] {marker-width: 14.7;}#table_4mi_1 [ b_physical <= 4] {marker-width: 12.4;}#table_4mi_1 [ b_physical <= 3] { marker-width: 10.2;}#table_4mi_1 [ b_physical <= 2] {marker-width: 7;}"
 	});
     return true;
 	},
 	food_water: function(){
     sublayers[0].set({
 	sql: "SELECT * FROM table_4mi_1 where b_food_and_water_problems <> 0",
-	cartocss: "#table_4mi_1{ marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.7; marker-line-opacity: 1; marker-placement: point;marker-multi-policy: largest; marker-type: ellipse; marker-fill: #D6301D;marker-allow-overlap: true; marker-clip: false;}#table_4mi_1 [ b_food_and_water_problems <= 19] {marker-width: 28.0;}#table_4mi_1 [ b_food_and_water_problems <= 18] {marker-width: 25.8;}#table_4mi_1 [ b_food_and_water_problems <= 17] {marker-width: 23.6;}#table_4mi_1 [ b_food_and_water_problems <= 10] { marker-width: 21.3;}#table_4mi_1 [ b_food_and_water_problems <= 9] {marker-width: 19.1;}#table_4mi_1 [ b_food_and_water_problems <= 7.5] {marker-width: 16.9;}#table_4mi_1 [ b_food_and_water_problems <= 6] {marker-width: 14.7;}#table_4mi_1 [ b_food_and_water_problems <= 5] {marker-width: 12.4;}#table_4mi_1 [ b_food_and_water_problems <= 3] {marker-width: 10.2;}#table_4mi_1 [ b_food_and_water_problems <= 2] {marker-width: 8.0;}"
+	cartocss: "#table_4mi_1{ marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.3; marker-line-opacity: 1; marker-placement: point;marker-multi-policy: largest; marker-type: ellipse; marker-fill: #B81609;marker-allow-overlap: true; marker-clip: false;}#table_4mi_1 [ b_food_and_water_problems <= 19] {marker-width: 26;}#table_4mi_1 [ b_food_and_water_problems <= 18] {marker-width: 25.8;}#table_4mi_1 [ b_food_and_water_problems <= 17] {marker-width: 23.6;}#table_4mi_1 [ b_food_and_water_problems <= 10] { marker-width: 21.3;}#table_4mi_1 [ b_food_and_water_problems <= 9] {marker-width: 19.1;}#table_4mi_1 [ b_food_and_water_problems <= 7.5] {marker-width: 16.9;}#table_4mi_1 [ b_food_and_water_problems <= 6] {marker-width: 14.7;}#table_4mi_1 [ b_food_and_water_problems <= 5] {marker-width: 12.4;}#table_4mi_1 [ b_food_and_water_problems <= 3] {marker-width: 10.2;}#table_4mi_1 [ b_food_and_water_problems <= 2] {marker-width: 7;}"
 	});
     return true;
 	},
 	djibouti: function(){
     sublayers[0].set({
 	sql: "SELECT * FROM table_4mi_1 where d_djibouti1 <> 0",
-	cartocss: "#table_4mi_1{ marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.7; marker-line-opacity: 1; marker-placement: point;marker-multi-policy: largest; marker-type: ellipse; marker-fill: #D6301D;marker-allow-overlap: true; marker-clip: false;}#table_4mi_1 [ d_djibouti1 <= 5] {marker-width: 28.0;}#table_4mi_1 [ d_djibouti1 <= 5] {marker-width: 25.8;}#table_4mi_1 [ d_djibouti1 <= 5] {marker-width: 23.6;}#table_4mi_1 [ d_djibouti1 <= 5] {marker-width: 21.3;}#table_4mi_1 [ d_djibouti1 <= 3] {marker-width: 19.1;}#table_4mi_1 [ d_djibouti1 <= 3] {marker-width: 16.9;}#table_4mi_1 [ d_djibouti1 <= 3] {marker-width: 14.7;}#table_4mi_1 [ d_djibouti1 <= 1] {marker-width: 12.4;}#table_4mi_1 [ d_djibouti1 <= 1] {marker-width: 10.2;}#table_4mi_1 [ d_djibouti1 <= 1] {marker-width: 8.0;}"
-	});
+	cartocss: "#table_4mi_1{ marker-fill-opacity: 0.9; marker-line-color: #FFF;marker-line-width: 0.3; marker-line-opacity: 1; marker-placement: point; marker-multi-policy: largest; marker-type: ellipse; marker-fill: #B81609; marker-allow-overlap: true; marker-clip: false;}#table_4mi_1 [ d_djibouti1 <= 3] {   marker-width: 26;}#table_4mi_1 [ d_djibouti1 <= 2] { marker-width: 17.0;}#table_4mi_1 [ d_djibouti1 <= 1] { marker-width: 7.0;}"});
     return true;
 	},
     
 	eritrea: function(){
     sublayers[0].set({
 	sql: "SELECT * FROM table_4mi_1 where d_eritrea1 <> 0",
-	cartocss: "#table_4mi_1{ marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.7; marker-line-opacity: 1; marker-placement: point;marker-multi-policy: largest; marker-type: ellipse; marker-fill: #D6301D;marker-allow-overlap: true; marker-clip: false;}#table_4mi_1 [ d_eritrea1 <= 22] {marker-width: 28.0;}#table_4mi_1 [ d_eritrea1 <= 17] {marker-width: 25.8;}#table_4mi_1 [ d_eritrea1 <= 14] {marker-width: 23.6;}#table_4mi_1 [ d_eritrea1 <= 11] {marker-width: 21.3;}#table_4mi_1 [ d_eritrea1 <= 8] {marker-width: 19.1;}#table_4mi_1 [ d_eritrea1 <= 6.5] {marker-width: 16.9;}#table_4mi_1 [ d_eritrea1 <= 5] {marker-width: 14.7;}#table_4mi_1 [ d_eritrea1 <= 4] {marker-width: 12.4;}#table_4mi_1 [ d_eritrea1 <= 3] {marker-width: 10.2;}#table_4mi_1 [ d_eritrea1 <= 2] {marker-width: 8.0;}"
-	});
+	cartocss: "#table_4mi_1{  marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.3; marker-line-opacity: 1;marker-placement: point; marker-multi-policy: largest;marker-type: ellipse;marker-fill: #B81609;marker-allow-overlap: true;marker-clip: false;}#table_4mi_1 [ d_eritrea1 <= 17] { marker-width: 26.0;}#table_4mi_1 [ d_eritrea1 <= 17] { marker-width: 23.3;}#table_4mi_1 [ d_eritrea1 <= 9] {  marker-width: 21.7;}#table_4mi_1 [ d_eritrea1 <= 7] { marker-width: 20.0;}#table_4mi_1 [ d_eritrea1 <= 6] { marker-width: 18.3;}#table_4mi_1 [ d_eritrea1 <= 5] { marker-width: 16.7;}#table_4mi_1 [ d_eritrea1 <= 4] { marker-width: 15.0;}#table_4mi_1 [ d_eritrea1 <= 3] { marker-width: 12;}#table_4mi_1 [ d_eritrea1 <= 2] { marker-width: 10;}#table_4mi_1 [ d_eritrea1 <= 1] { marker-width: 7;}"});
     return true;
 	},
 	ethiopia: function(){
     sublayers[0].set({
 	sql: "SELECT * FROM table_4mi_1 where d_ethiopia1 <> 0",
-	cartocss: "#table_4mi_1{ marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.7; marker-line-opacity: 1; marker-placement: point;marker-multi-policy: largest; marker-type: ellipse; marker-fill: #D6301D;marker-allow-overlap: true; marker-clip: false;}#table_4mi_1 [ d_ethiopia1 <= 48] {marker-width: 28.0;}#table_4mi_1 [ d_ethiopia1 <= 21] {marker-width: 25.8;}#table_4mi_1 [ d_ethiopia1 <= 17] {marker-width: 23.6;}#table_4mi_1 [ d_ethiopia1 <= 12] {marker-width: 21.3;}#table_4mi_1 [ d_ethiopia1 <= 10] {marker-width: 19.1;}#table_4mi_1 [ d_ethiopia1 <= 8.5] {marker-width: 16.9;}#table_4mi_1 [ d_ethiopia1 <= 7] {marker-width: 14.7;}#table_4mi_1 [ d_ethiopia1 <= 5] {marker-width: 12.4;}#table_4mi_1 [ d_ethiopia1 <= 3] {marker-width: 10.2;}#table_4mi_1 [ d_ethiopia1 <= 2] {marker-width: 8.0;}"
-	});
+	cartocss: "#table_4mi_1{ marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.3; marker-line-opacity: 1; marker-placement: point; marker-multi-policy: largest; marker-type: ellipse; marker-fill: #B81609; marker-allow-overlap: true; marker-clip: false;}#table_4mi_1 [ d_ethiopia1 <= 15] { marker-width: 26.0;}#table_4mi_1 [ d_ethiopia1 <= 10] { marker-width: 21.0;}#table_4mi_1 [ d_ethiopia1 <= 7] { marker-width: 17.0;}#table_4mi_1 [ d_ethiopia1 <= 5] { marker-width: 13.0;}#table_4mi_1 [ d_ethiopia1 <= 3] { marker-width: 11.0;}#table_4mi_1 [ d_ethiopia1 <= 1] {  marker-width: 7.0;}"});
     return true;
 	},
 	somalia: function(){
     sublayers[0].set({
 	sql: "SELECT * FROM table_4mi_1 where d_somalia1 <> 0",
-	cartocss: "#table_4mi_1{marker-fill-opacity: 0.9;marker-line-color: #FFF;marker-line-width: 0.7;marker-line-opacity: 1;marker-placement: point;marker-multi-policy: largest;marker-type: ellipse;marker-fill: #D6301D;marker-allow-overlap: true;marker-clip: false;}#table_4mi_1 [ d_somalia1 <= 51] {marker-width: 28.0;}#table_4mi_1 [ d_somalia1 <= 19] {marker-width: 25.8;}#table_4mi_1 [ d_somalia1 <= 14.5] {marker-width: 23.6;}#table_4mi_1 [ d_somalia1 <= 13] {marker-width: 21.3;}#table_4mi_1 [ d_somalia1 <= 9.5] {marker-width: 19.1;}#table_4mi_1 [ d_somalia1 <= 8] {marker-width: 16.9;}#table_4mi_1 [ d_somalia1 <= 6.5] {marker-width: 14.7;}#table_4mi_1 [ d_somalia1 <= 5] { marker-width: 12.4;}#table_4mi_1 [ d_somalia1 <= 3.5] {marker-width: 10.2;}#table_4mi_1 [ d_somalia1 <= 2] {marker-width: 8.0;}"
-	});
+	cartocss: "#table_4mi_1{ marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.3;marker-line-opacity: 1;marker-placement: point;marker-multi-policy: largest;  marker-type: ellipse;  marker-fill: #B81609;  marker-allow-overlap: true;  marker-clip: false;}#table_4mi_1 [ d_somalia1 <= 15] {marker-width: 26.0;}#table_4mi_1 [ d_somalia1 <= 10] { marker-width: 21.7;}#table_4mi_1 [ d_somalia1 <= 9] {   marker-width: 20.0;}#table_4mi_1 [ d_somalia1 <= 8] {  marker-width: 18.3;}#table_4mi_1 [ d_somalia1 <= 7] {  marker-width: 16.7;}#table_4mi_1 [ d_somalia1 <= 5] { marker-width: 15.0;}#table_4mi_1 [ d_somalia1 <= 4] {  marker-width: 13;}#table_4mi_1 [ d_somalia1 <= 3] {   marker-width: 10;}#table_4mi_1 [ d_somalia1 <= 1] {  marker-width: 7;}"});
     return true;
 	},
 	female: function(){
     sublayers[0].set({
 	sql: "SELECT * FROM table_4mi_1 where c_female <> 0",
-	cartocss: "#table_4mi_1{ marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.7; marker-line-opacity: 1; marker-placement: point;marker-multi-policy: largest; marker-type: ellipse; marker-fill: #D6301D;marker-allow-overlap: true; marker-clip: false;}#table_4mi_1 [ c_female <= 25] {marker-width: 28.0;}#table_4mi_1 [ c_female <= 15] {marker-width: 25.8;}#table_4mi_1 [ c_female <= 12] {marker-width: 23.6;}#table_4mi_1 [ c_female <= 11] {marker-width: 21.3;}#table_4mi_1 [ c_female <= 8] {marker-width: 19.1;}#table_4mi_1 [ c_female <= 6] {marker-width: 16.9;}#table_4mi_1 [ c_female <= 5] {marker-width: 14.7;}#table_4mi_1 [ c_female <= 4] {marker-width: 12.4;}#table_4mi_1 [ c_female <= 3] {marker-width: 10.2;}#table_4mi_1 [ c_female <= 2] {marker-width: 8.0;}"
-	});
+	cartocss: "#table_4mi_1{ marker-fill-opacity: 0.9;  marker-line-color: #FFF; marker-line-width: 0.3; marker-line-opacity: 1; marker-placement: point;marker-multi-policy: largest; marker-type: ellipse; marker-fill: #B81609;marker-allow-overlap: true;marker-clip: false;}#table_4mi_1 [ c_female <= 11] {marker-width: 26.0;}#table_4mi_1 [ c_female <= 6] { marker-width: 21.0;}#table_4mi_1 [ c_female <= 4] { marker-width: 15.0;}#table_4mi_1 [ c_female <= 3] { marker-width: 11.0;}#table_4mi_1 [ c_female <= 1] { marker-width: 7.0;}"});
     return true;
 	},
 	male: function(){
     sublayers[0].set({
 	sql: "SELECT * FROM table_4mi_1 where c_male <> 0",
-	cartocss: "#table_4mi_1{ marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.7; marker-line-opacity: 1; marker-placement: point;marker-multi-policy: largest; marker-type: ellipse; marker-fill: #D6301D;marker-allow-overlap: true; marker-clip: false;}#table_4mi_1 [ c_male <= 56] {marker-width: 28.0;}#table_4mi_1 [ c_male <= 32] {marker-width: 25.8;}#table_4mi_1 [ c_male <= 19] {marker-width: 23.6;}#table_4mi_1 [ c_male <= 16] {marker-width: 21.3;}#table_4mi_1 [ c_male <= 14] {marker-width: 19.1;}#table_4mi_1 [ c_male <= 11] {marker-width: 16.9;}#table_4mi_1 [ c_male <= 9] {marker-width: 14.7;}#table_4mi_1 [ c_male <= 7] {marker-width: 12.4;}#table_4mi_1 [ c_male <= 5] {marker-width: 10.2;}#table_4mi_1 [ c_male <= 3] {marker-width: 8.0;}"
-	});
+	cartocss: "#table_4mi_1{marker-fill-opacity: 0.9; marker-line-color: #FFF; marker-line-width: 0.3; marker-line-opacity: 1; marker-placement: point; marker-multi-policy: largest; marker-type: ellipse; marker-fill: #B81609; marker-allow-overlap: true; marker-clip: false;}#table_4mi_1 [ c_male <= 18] { marker-width: 26.0;}#table_4mi_1 [ c_male <= 15] { marker-width: 20;}#table_4mi_1 [ c_male <= 13] { marker-width: 17.0;}#table_4mi_1 [ c_male <= 10] {marker-width: 15.0;}#table_4mi_1 [ c_male <= 6] {marker-width: 13.0;}#table_4mi_1 [ c_male <= 4] { marker-width: 10.0;}#table_4mi_1 [ c_male <= 2] {marker-width: 7.0;}"});
     return true;
 	},
   
@@ -353,22 +305,26 @@
     
  
   </script>
+
+	
 </head>
 
 <body onload="init()">
   <div id='map'></div>
-    <div style="position:relative;top:-590px;left: -100px; background-color:#fff; opacity: 1; text-align: center">
+    <div style="position:relative;top:-600px;left: -80px; background-color:#fff; opacity: 1; text-align: center">
 	<a href="http://migrantreport.org/">
-		<img src="http://migrantreport.org/wp-content/uploads/migrant-report-logo.jpg" alt="migrnats" style="float:right;width:50px;height:45px;font-size:25;opacity: 0.7">
+		<img src="http://migrantreport.org/wp-content/uploads/migrant-report-logo.jpg" alt="migrnats" style="float:right;width:45px;height:40px;font-size:25;opacity: 0.7">
     </a>
 	
 	</div>
-  
+	
+	
+
     <div id="dashboard2">
-    <p style ="text-align: center;font-size:20;color:#003E7D;font-weight:bold;padding:10px;margin-bottom:5px;margin-top:0px;font-family: 'Open Sans', sans-serif;">Mixed Migration Mechanism Iniciative</p>
-    <p><img src="http://migrantreport.org/wp-content/uploads/4mi1.png" alt="migrnats" style="float:right;width:150px;height:60px;opacity: 0.7;padding: 0px 0px 0px;margin-top:10px;margin-right:60;"></p>
+    <p style ="text-align: center;font-size:22;color:black;font-weight:bold;padding:10px;margin-bottom:0px;margin-top:0px;font-family: 'Open Sans', sans-serif;opacity: 0.8">Mixed Migration Mechanism Iniciative</p>
+    <p><img src="http://migrantreport.org/wp-content/uploads/4mi1.png" alt="migrnats" style="float:right;width:100px;height:40px;opacity: 0.8;padding: 0px 0px 0px;margin-top:-5px;margin-right:60;"></p>
     <div id='menu'>
-	<p style ="text-align: center;font-size:14;color:black;font-weight: bold;margin-bottom:-3px;font-family: 'Open Sans', sans-serif;">Filter by Incidents</p>
+	<p style ="text-align: left;font-size:13;color:black;font-weight: bold;margin-bottom:-3px;font-family: 'Open Sans', sans-serif;">Filter by Incidents</p>
     <a href="#physical" id="physical" class="button capitals">Physical Abuse</a> 
     <a href="#Sexual" id="Sexual" class="button megacities">Sexual Abuse</a> 
 	<a href="#kidnap" id="kidnap" class="button capitals">Kidnapping</a> 
@@ -376,33 +332,36 @@
 	<a href="#Missing" id="Missing" class="button megacities">Missing People</a> 
 	<a href="#deaths" id="deaths" class="button megacities">Deaths</a>
 	<a style ="margin-bottom:10px" href="#food_water" id="food_water" class="button megacities">Lack of Food/Water</a>
-	<p style ="text-align: center;font-size:14;color:black;font-weight: bold;padding:0px;margin-bottom:-3px;font-family: 'Open Sans', sans-serif;">Filter by Country</p>
+	<p style ="text-align: left;font-size:13;color:black;font-weight: bold;padding:0px;margin-bottom:-3px;font-family: 'Open Sans', sans-serif;">Filter by Country</p>
     <a href="#djibouti" id="djibouti" class="button megacities">Djibouti</a> 
 	<a href="#eritrea" id="eritrea" class="button capitals">Eritrea</a> 
     <a href="#somalia" id="somalia" class="button megacities">Somalia</a> 
 	<a style ="margin-bottom:10px" href="#ethiopia" id="ethiopia" class="button megacities">Ethiopia</a>
-	<p style ="text-align: center;font-size:14;color:black;font-weight: bold;padding:0px;margin-bottom:-3px;font-family: 'Open Sans', sans-serif;">Filter by Gender</p>
+	<p style ="text-align: left;font-size:13;color:black;font-weight: bold;padding:0px;margin-bottom:-3px;font-family: 'Open Sans', sans-serif;">Filter by Gender</p>
 	<a href="#male" id="male" class="button megacities">Male</a>
 	<a href="#female" id="female" class="button megacities">Female</a>
   </div> 
   <div id="dashboard">
   
-  <div style ="font-size:15;color:#54544F;opacity: 1;padding: 0px 10px 0px;margin: 0cm 0cm 0cm 0cm;text-align: center;margin-top: -10px">
+  <div style ="font-size:15;color:#54544F;opacity: 1;padding: 0px 10px 0px;margin: 0cm 0cm 0cm 0cm;text-align: center;margin-top: 0px">
   
-  <div id="header" style ="margin-bottom:25px;margin-top:4px;font-size:25;color:#3B3B37; top:0px;padding-left:10px;font-weight: bold"></div>  
-  <p id="event1" style ="margin-bottom:10px;margin-top:4px;font-size:12;color:#3B3B37; top:0px;padding-left:10px;font-weight: bold"><img src="http://migrantreport.org/wp-content/uploads/finger_01.png" alt="migrnats" style="padding-right:10px;float:right;width:170px;height:80px;font-size:20;opacity: 1;margin-top:5px,">Click over the symbols to display figures.</p>  
-  <p id="event2" style ="margin-bottom:10px;margin-top:4px;font-size:12;color:#3B3B37; top:0px;padding-left:10px;font-weight: bold"><img src="http://migrantreport.org/wp-content/uploads/finger_02.png" alt="migrnats" style="padding-right:10px;float:right;width:170px;height:80px;font-size:20;opacity: 1;margin-top: -15px,">Click over the routes to display pictures. (only available for the East African Route).</p>
-  </div>
-  <div id="chart_div" style ="padding:0px;"></div>
-  </div>
-  <div id="dashboard3">
-  <p style ="font-size:12;color:#3B3B37; top:10px;padding-left:13px;">Data collected from Oct. 2014 to Oct. 2015</p>
-  <p style ="font-size:12;color:#3B3B37; top:0px;padding-left:13px;">Sample size : 386  </p>
-  
-  </div>
-  
-  </div>
+  <div id="header" style ="margin-bottom:0px;margin-top:0px;font-size:18;color:#3B3B37; top:0px;padding-left:10px;font-weight: bold"></div>  
+  <p id="event3" style ="margin-bottom:20px;margin-top:4px;font-size:13;color:#3B3B37; top:0px;padding-left:10px;font-weight: bold"></p>
+  <p id="event1" style ="margin-bottom:10px;margin-top:4px;font-size:11;color:#3B3B37; top:0px;padding-left:10px"><img src="http://migrantreport.org/wp-content/uploads/finger_01.png" alt="migrnats" style="padding-right:10px;float:right;width:170px;height:80px;font-size:20;opacity: 1;margin-top:5px,">Click over the symbols to display the location and incident type.</p>  
+  <p id="event2" style ="margin-bottom:10px;margin-top:4px;font-size:11;color:#3B3B37; top:0px;padding-left:10px"><img src="http://migrantreport.org/wp-content/uploads/finger_02.png" alt="migrnats" style="padding-right:10px;float:right;width:170px;height:80px;font-size:20;opacity: 1;margin-top: -15px,">Click over the lines to display pictures.(only available for East-African route).</p>
 
+ 
+
+ </div>
+
+  </div>
+  <div id="dashboard3" style= "bot:0px" >
+  <p style ="font-size:10;color:#3B3B37; top:10px;padding-left:0px;margin-bottom:0">Data collected from Oct. 2014 to Oct. 2015</p>
+  <p style ="font-size:10;color:#3B3B37; top:0px;padding-left:0px;margin-top:0">Sample size : 454 </p>
+  
+  </div>
+  
+  </div>
 
 </body>
 </html>
