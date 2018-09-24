@@ -6,7 +6,7 @@ var code = "1EXl0ZGn4RMBtim_c4zwA_te3VQgIquVywZlT_XKR0qo"
 document.addEventListener('DOMContentLoaded',function(){
   map = L.map('map').setView([22, 11], 4);
   L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      attribution: '&copy; &copy; Global Initiative | Pablo Gallego'
   }).addTo(map);
   
    var marker1 = {
