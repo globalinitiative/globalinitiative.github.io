@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded',function(){
   };
   
   var firefoxIcon = L.icon({
-        iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Target_Corporation_logo_%28vector%29.svg/1200px-Target_Corporation_logo_%28vector%29.svg.png',
+        iconUrl: 'https://globalinitiative.github.io/detention-centers/img/target_logo_1.png',
         iconSize: [12, 12], // size of the icon
         });
   
