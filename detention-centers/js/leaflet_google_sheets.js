@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded',function(){
   };
   
   var firefoxIcon = L.icon({
-        iconUrl: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Google_Map_Marker.svg/2000px-Google_Map_Marker.svg.png',
+        iconUrl: 'https://banner2.kisspng.com/20180605/gtw/kisspng-logo-target-corporation-red-marker-5b16467f1bdee9.6471526315281864951142.jpg',
         iconSize: [7, 7], // size of the icon
         });
   
