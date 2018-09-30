@@ -1,5 +1,5 @@
 var map;
-var code = "1EXl0ZGn4RMBtim_c4zwA_te3VQgIquVywZlT_XKR0qo"
+var code = "1EBf7nu0sh5BNtORew9A0N4MYI12fds0fY17InIlqEGk"
 
 document.addEventListener('DOMContentLoaded',function(){
   map = L.map('map').setView([22, 11], 4);
@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded',function(){
         L.marker([place.lat, place.lon], {icon: firefoxIcon})
           .addTo(map)
           .bindPopup(place.name)
+	      
       }
     },
     simpleSheet: true 
