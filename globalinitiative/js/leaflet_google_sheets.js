@@ -1,17 +1,52 @@
 
 var map;
-
-var code = "1EXl0ZGn4RMBtim_c4zwA_te3VQgIquVywZlT_XKR0qo"
+var code = "1EBf7nu0sh5BNtORew9A0N4MYI12fds0fY17InIlqEGk"
 
 document.addEventListener('DOMContentLoaded',function(){
-  map = L.map('map').setView([22, 11], 4);
-  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Dark_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-      attribution: '&copy; Global Initiative | Pablo Gallego'
+  
+  
+ // map = L.map('map').setView([26.822014, 17.182133], 6);
+  
+  map = L.map('map', {
+		center: [26.822014, 17.182133],
+		zoom: 6,
+		layers: []
+	});
+  
+ L.tileLayer('https://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}', {
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map);
+  
+  // hydrology overlay layer
+  
+  
+var satellite  = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}.png', {
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  }),
+
+  arabic  = L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+  });
+
+
+
+// json object for layer switcher control basemaps
+var baseLayers = {
+		"Satellite": satellite,
+		"Arabic ": arabic 
+	};
+
+/*var overlayMaps = {
+    "Detention Centers": code
+};*/
+
+// add layer groups to layer switcher control
+var controlLayers = L.control.layers(baseLayers).addTo(map);
+  
   
    var marker1 = {
     radius: 3,
-    fillColor: "white",
+    fillColor: "#03A9F4",
     // color: "#fff",
     weight: 0,
     opacity: 1,
@@ -19,8 +54,8 @@ document.addEventListener('DOMContentLoaded',function(){
   };
   
   var firefoxIcon = L.icon({
-        iconUrl: 'https://mbtskoudsalg.com/images/blank-circle-png-3.gif',
-        iconSize: [7, 7], // size of the icon
+        iconUrl: 'https://globalinitiative.github.io/detention-centers/img/target_logo_1.png',
+        iconSize: [16, 16], // size of the icon
         });
   
   
@@ -31,14 +66,14 @@ document.addEventListener('DOMContentLoaded',function(){
         var place = sheet[i];
         L.marker([place.lat, place.lon], {icon: firefoxIcon})
           .addTo(map)
-          .bindPopup(place.name)
+          .bindPopup("<strong>Detention center name: </strong>"+ place.name +"<br><strong>Latitude:</strong>"+ place.lat +"<br><strong>Longitude:</strong>"+ place.lon)
+
       }
     },
     simpleSheet: true 
   })
   
- 
- //routes JSON
+ //Libya Boundary JSON
  
  
 		function onEachFeature(feature, layer) {
@@ -56,16 +91,15 @@ document.addEventListener('DOMContentLoaded',function(){
 		
 		
 		var myStyle = {
-		 "color": "yellow",
+		 "color": 'grey',  //Outline color
 		 "dashArray": '',
-		 "weight": 1,
-		 "opacity": 0.2
-		};
-
-		
-		
-		
-		L.geoJson(routes, {
+		 
+         
+		 "fillColor": "rgba(38, 12, 12, 0.5)",
+		 "weight": 2,
+		 "opacity": 1
+		}; 
+   L.geoJson(libya, {
 
 			filter: function (feature, layer) {
 				if (feature.properties) {
@@ -77,9 +111,5 @@ document.addEventListener('DOMContentLoaded',function(){
 			style: myStyle,
 			onEachFeature: onEachFeature
 		}).addTo(map);
-
-	//labels//
- 
- 
   
 })
