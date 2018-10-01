@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded',function(){
 	});
   
  L.tileLayer('https://korona.geog.uni-heidelberg.de/tiles/roadsg/x={x}&y={y}&z={z}', {
-      attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      attribution: '&copy; Global Initiative | Pablo Gallego'
   }).addTo(map);
   
   // hydrology overlay layer
