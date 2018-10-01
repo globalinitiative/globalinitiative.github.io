@@ -65,7 +65,7 @@ var controlLayers = L.control.layers(baseLayers).addTo(map);
         var place = sheet[i];
         L.marker([place.lat, place.lon], {icon: firefoxIcon})
           .addTo(map)
-          .bindPopup("<strong>Detention center name: </strong>"+ place.name +"<br><strong>Latitude:</strong>"+ place.lat +"<br><strong>Longitude:</strong>"+ place.lon)
+         .bindPopup("<p style='font-size:18px' >"+ place.name + " (" +place.arabic +")"+"</p>"+ "<br><strong>Latitude:</strong>"+ place.lat +"<br><strong>Longitude:</strong>"+ place.lon)
 
       }
     },
